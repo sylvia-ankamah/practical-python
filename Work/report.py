@@ -1,21 +1,23 @@
 # report.py
 #
-# Exercise 2.11
+# Exercise 2.16(b)
 import csv
 def read_portfolio(filename):
-    '''Read in the holdings from a portfolio'''
+
     portfolio= []
 
     with open(filename, 'rt') as f:
         rows = csv.reader(f)
         headers = next(rows)
         for row in rows:
-            holding = {'name':row[0],
-            'shares': int(row[1]), 
-            'price': float(row[2])
+           record= dict(zip(headers, row))
+           stock = {
+            'name' : record['name'],
+            'shares': int(record['shares']), 
+            'price': float(record['price'])
             }
-            portfolio.append(holding)
-            
+        portfolio.append(stock)
+    
     return portfolio
 
 
@@ -36,21 +38,12 @@ def read_prices(filename):
 portfolio = read_portfolio('Data/portfolio.csv')
 prices = read_prices('Data/prices.csv')
 
-total_cost = 0.0
-current_value = 0.0
-for s in portfolio:
-    total_cost += s['shares']*s['price']
-    current_value += s['shares']*prices[s['name']]
 
-print('Total cost:', total_cost)
-print('Current value:', current_value)
-print('Gain/Loss:', current_value - total_cost)
+
+
 
 def make_report_data(portfolio, prices):
-    '''
-    Make a list of (name, shares, price, change) tuples given a portfolio list
-    and prices dictionary.
-    '''
+    
     rows = []
     for stock in portfolio:
         current_price = prices[stock['name']]
