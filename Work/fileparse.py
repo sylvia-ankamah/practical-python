@@ -37,3 +37,6 @@ def parse_csv(filename, select=None):
             records.append(record)
 
     return records
+
+shares_held = parse_csv('Data/portfolio.csv', select=['name', 'shares'], types=[str, int])
+print(shares_held)  
