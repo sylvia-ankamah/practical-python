@@ -1,6 +1,6 @@
 # fileparse.py
 #
-# Exercise 3.3
+# Exercise 3.4
 import csv
 
 def parse_csv(filename, select=None):
@@ -24,10 +24,13 @@ def parse_csv(filename, select=None):
         for row in rows:
             if not row:    # Skip rows with no data
                 continue
-            
+
             if indices:
                 row = [ row[index] for index in
                 indices ]
+            
+            if types:
+                 row = [func(val) for func, val in zip(types, row) ]
 
 
             record = dict(zip(headers, row))
