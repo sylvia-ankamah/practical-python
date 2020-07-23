@@ -1,6 +1,6 @@
 # pcost.py
 #
-# Exercise 3.14
+# Exercise 3.18
 import report
 
 def portfolio_cost(filename):
